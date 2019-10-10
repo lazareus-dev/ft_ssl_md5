@@ -14,9 +14,18 @@
 #include "../includes/ft_ssl.h"
 #include <unistd.h>
 
-void	ssl_process_arg(char **av, t_ssl *ssl)
+static void	process_opt(char *av, t_ssl *ssl)
 {
+	if (av[0] == '-')
+		
+}
 
+static void	process_arg(char **av, t_ssl *ssl)
+{
+	t_arg	arg;
+
+	if (*av[0] == '-')
+		process_opt(*av++, ssl);
 }
 
 void	ssl_main_process(char **av, t_ssl *ssl)

@@ -19,12 +19,16 @@
 # define MD5 0
 # define SHA256 1
 
-typedef struct		s_args
+# define STDIN	0
+# define FILE	1
+
+typedef struct		s_arg
 {
+	short			arg_type;
 	char			*filename;
-	struct s_args	*prev;
-	struct s_args	*next;
-}					t_args;
+	int				fd;
+	t_mem			argument;
+}					t_arg;
 
 /*
 ** Main struct
@@ -33,7 +37,8 @@ typedef struct		s_ssl
 {
 	t_mem			std_in;
 	short			reverse;
-	short			quiet;	
+	short			quiet;
+	short			only_file;
 	void			(*hashfct)(void);
 	int				ret;
 }					t_ssl;
