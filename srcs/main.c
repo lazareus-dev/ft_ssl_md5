@@ -14,6 +14,29 @@
 #include "../includes/ft_ssl.h"
 #include <unistd.h>
 
+void	ssl_process_arg(char **av, t_ssl *ssl)
+{
+
+}
+
+void	ssl_main_process(char **av, t_ssl *ssl)
+{
+	while (*av)
+	{
+		ssl_process_arg(av, ssl);
+		if (*av)
+			av++;
+	}
+}
+
+void	init_ssl(t_ssl *ssl)
+{
+	ssl->std_in.content = NULL;
+	ssl->std_in.len = 0;
+	ssl->hashfct = NULL;
+	ssl->ret = 0;
+}
+
 int		ssl_get_cmd(t_ssl *ssl, char *cmd)
 {
 	if (ft_strequ(cmd, "md5"))
@@ -29,11 +52,11 @@ int		main(int ac, char **av)
 {
 	t_ssl ssl;
 
-	(void)av;
 	if (ac == 1)
 		return (ssl_usage());
 	if (ssl_get_cmd(&ssl, av[1]) == -1)
 		return (usage_invalid_cmd(av[1]));
-	
+	init_ssl(&ssl);
+	ssl_process(av, &ssl);
 	return (0);
 }

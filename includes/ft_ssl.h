@@ -22,7 +22,6 @@
 typedef struct		s_args
 {
 	char			*filename;
-	int				opts;
 	struct s_args	*prev;
 	struct s_args	*next;
 }					t_args;
@@ -32,9 +31,11 @@ typedef struct		s_args
 */
 typedef struct		s_ssl
 {
-	t_headlst		args_lst;
 	t_mem			std_in;
-	void			(*hashfct)(void);	
+	short			reverse;
+	short			quiet;	
+	void			(*hashfct)(void);
+	int				ret;
 }					t_ssl;
 
 /*
@@ -44,7 +45,7 @@ int					ssl_usage(void);
 int					usage_invalid_cmd(char *cmd);
 
 /*
-** Main hash functions
+** Hash functions
 */
 void				ssl_md5(void);
 void				ssl_sha256(void);
