@@ -17,9 +17,9 @@
 int		ssl_get_cmd(t_ssl *ssl, char *cmd)
 {
 	if (ft_strequ(cmd, "md5"))
-		ssl->cmd = MD5;
+		ssl->hashfct = ssl_md5;
 	else if (ft_strequ(cmd, "sha256"))
-		ssl->cmd = SHA256;
+		ssl->hashfct = ssl_sha256;
 	else
 		return (-1);
 	return (0);

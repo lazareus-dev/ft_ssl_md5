@@ -17,7 +17,15 @@ CC = clang
 
 FLAGS		= 	-Wall -Wextra -Werror -O2 -g
 
-FILENAMES   =   main.c ssl_usage.c
+SSL_MD5		=	$(addprefix ssl_md5/, \
+				ssl_md5.c)
+
+SSL_SHA256		=	$(addprefix ssl_sha256/, \
+				ssl_sha256.c)
+
+FILENAMES   =   main.c ssl_usage.c \
+				$(SSL_MD5) \
+				$(SSL_SHA256) \
 
 SOURCES     =   $(addprefix srcs/, $(FILENAMES))
 

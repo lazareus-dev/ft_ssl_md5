@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_get_raw_stdin.c                               .::    .:/ .      .::   */
+/*   ssl_sha256.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tle-coza <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/10 14:34:39 by tle-coza     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 14:34:53 by tle-coza    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/10 15:41:58 by tle-coza     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/10 15:41:59 by tle-coza    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/ft_ssl.h"
 
-void	ft_get_raw_input(int fd, t_mem *memory)
+void	ssl_sha256(void)
 {
-	uint8_t	*input;
-	char	buffer[5];
-	int		retread;
-	size_t	len;
 
-	input = NULL;
-	retread = 0;
-	len = 0;
-	ft_bzero(buffer, 5);
-	while ((retread = read(fd, buffer, 4)))
-	{
-		input = ft_mem_joinordup(input, buffer, len, retread);
-		len += retread;
-	}
-	memory->content = input;
-	memory->len = len;
 }
