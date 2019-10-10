@@ -23,7 +23,7 @@ SSL_MD5		=	$(addprefix ssl_md5/, \
 SSL_SHA256		=	$(addprefix ssl_sha256/, \
 				ssl_sha256.c)
 
-FILENAMES   =   main.c ssl_usage.c \
+FILENAMES   =   main.c ssl_usage.c ssl_process.c ssl_arg.c \
 				$(SSL_MD5) \
 				$(SSL_SHA256) \
 

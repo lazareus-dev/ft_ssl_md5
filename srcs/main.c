@@ -12,36 +12,12 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_ssl.h"
-#include <unistd.h>
-
-static void	process_opt(char *av, t_ssl *ssl)
-{
-	if (av[0] == '-')
-		
-}
-
-static void	process_arg(char **av, t_ssl *ssl)
-{
-	t_arg	arg;
-
-	if (*av[0] == '-')
-		process_opt(*av++, ssl);
-}
-
-void	ssl_main_process(char **av, t_ssl *ssl)
-{
-	while (*av)
-	{
-		ssl_process_arg(av, ssl);
-		if (*av)
-			av++;
-	}
-}
 
 void	init_ssl(t_ssl *ssl)
 {
 	ssl->std_in.content = NULL;
 	ssl->std_in.len = 0;
+	ssl->only_file = 0;
 	ssl->hashfct = NULL;
 	ssl->ret = 0;
 }
@@ -66,6 +42,6 @@ int		main(int ac, char **av)
 	if (ssl_get_cmd(&ssl, av[1]) == -1)
 		return (usage_invalid_cmd(av[1]));
 	init_ssl(&ssl);
-	ssl_process(av, &ssl);
+	ssl_main_process(av + 2, &ssl);
 	return (0);
 }

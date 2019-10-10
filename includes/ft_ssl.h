@@ -21,6 +21,7 @@
 
 # define STDIN	0
 # define FILE	1
+# define STR	2
 
 typedef struct		s_arg
 {
@@ -54,5 +55,13 @@ int					usage_invalid_cmd(char *cmd);
 */
 void				ssl_md5(void);
 void				ssl_sha256(void);
+
+/*
+**	Process
+*/
+void	ssl_main_process(char **av, t_ssl *ssl);
+
+void	init_ssl_arg(t_arg *arg);
+void	clear_ssl_arg(t_arg *arg);
 
 #endif
