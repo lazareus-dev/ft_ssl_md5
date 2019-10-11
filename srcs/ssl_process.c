@@ -53,15 +53,24 @@ static int	process_str(char ***av, t_arg *arg)
 	return (0);
 }
 
+int		handle_dash(char *opt, t_ssl *ssl)
+{
+	ssl->only_file = 1;
+	if (*(opt + 1))
+	{
+		ssl->exit = 1;
+		return (ssl_opt_usage('-', ILLEGAL));	
+	}
+	return (0);
+}
+
 static int	process_opt(char ***av, t_arg *arg, t_ssl *ssl)
 {
-	// dprintf(1, "process_opt\n");
+	**av += 1;
 	while (***av)
 	{
 		if (***av == '-')
-		{
-			(void)ssl->only_file;
-		}
+			return(handle_dash(**av, ssl));
 		else if (***av == 's')
 			return (process_str(av, arg));
 		if (***av)
@@ -72,7 +81,6 @@ static int	process_opt(char ***av, t_arg *arg, t_ssl *ssl)
 
 static int	process_arg(char ***av, t_ssl *ssl)
 {
-	// dprintf(1, "process_arg\n");
 	t_arg	arg;
 	int		ret;
 
@@ -82,9 +90,11 @@ static int	process_arg(char ***av, t_ssl *ssl)
 	if (**av[0] == '-' && !ssl->only_file)
 		process_opt(av, &arg, ssl);
 	else
+	{
+		ssl->only_file = 1;
 		process_file(*av, &arg);
-	
-	debug_arg(&arg);
+	}
+	// debug_arg(&arg);
 
 	clear_ssl_arg(&arg);
 	return (ret);
@@ -92,10 +102,8 @@ static int	process_arg(char ***av, t_ssl *ssl)
 
 void	ssl_main_process(char **av, t_ssl *ssl)
 {
-	// dprintf(1, "ssl_main_process\n");
-	while (*av)
+	while (*av && (ssl->exit != 1))
 	{
-		// dprintf(1, "current arg : [%s]\n", *av);
 		process_arg(&av, ssl);
 		if (*av)
 			av++;

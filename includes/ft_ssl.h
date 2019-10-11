@@ -45,6 +45,7 @@ typedef struct		s_ssl
 	short			only_file;
 	void			(*hashfct)(void);
 	int				ret;
+	int				exit;
 }					t_ssl;
 
 /*

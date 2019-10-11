@@ -20,6 +20,7 @@ void	init_ssl(t_ssl *ssl)
 	ssl->only_file = 0;
 	ssl->hashfct = NULL;
 	ssl->ret = 0;
+	ssl->exit = 0;
 }
 
 int		ssl_get_cmd(t_ssl *ssl, char *cmd)
