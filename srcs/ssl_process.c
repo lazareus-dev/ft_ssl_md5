@@ -14,7 +14,7 @@
 #include "../includes/ft_ssl.h"
 #include <stdio.h>
 
-static int	process_file(char **filename, t_arg *arg)
+static int	process_file(char **filename, t_arg *arg, t_ssl *ssl)
 {
 	arg->type = FILE;
 	arg->filename = *filename;
@@ -26,13 +26,14 @@ static int	process_file(char **filename, t_arg *arg)
 		return (1);
 	}
 	ft_get_raw_input(arg->fd, &(arg->argument));
+	ssl->hashfct(arg->argument.content);	
 	return (0);
 }
 
 /*
 ** End up here if `s' option is found
 */
-static int	process_str(char ***av, t_arg *arg)
+static int	process_str(char ***av, t_arg *arg, t_ssl *ssl)
 {
 	// dprintf(1, "process_str\n");
 	**av += 1;
@@ -50,6 +51,7 @@ static int	process_str(char ***av, t_arg *arg)
 	else
 		return (ssl_opt_usage('s', MISS_ARG));
 	arg->type = STR;
+	ssl->hashfct(arg->argument.content);	
 	return (0);
 }
 
@@ -76,7 +78,7 @@ static int	process_opt(char ***av, t_arg *arg, t_ssl *ssl)
 		if (***av == 'r')
 			ssl->reverse = 1;
 		if (***av == 's')
-			return (process_str(av, arg));
+			return (process_str(av, arg, ssl));
 		if (***av)
 			**av += 1;
 	}
@@ -90,16 +92,14 @@ static int	process_arg(char ***av, t_ssl *ssl)
 
 	ret = 0;
 	init_ssl_arg(&arg);
-	
 	if (**av[0] == '-' && !ssl->only_file)
 		process_opt(av, &arg, ssl);
 	else
 	{
 		ssl->only_file = 1;
-		process_file(*av, &arg);
+		process_file(*av, &arg, ssl);
 	}
 	// debug_arg(&arg);
-
 	clear_ssl_arg(&arg);
 	return (ret);
 }
