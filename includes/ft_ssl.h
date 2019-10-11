@@ -23,9 +23,12 @@
 # define FILE	1
 # define STR	2
 
+# define MISS_ARG	0
+# define ILLEGAL	1
+
 typedef struct		s_arg
 {
-	short			arg_type;
+	short			type;
 	char			*filename;
 	int				fd;
 	t_mem			argument;
@@ -49,6 +52,7 @@ typedef struct		s_ssl
 */
 int					ssl_usage(void);
 int					usage_invalid_cmd(char *cmd);
+int					ssl_opt_usage(char c, int type);
 
 /*
 ** Hash functions
@@ -59,9 +63,14 @@ void				ssl_sha256(void);
 /*
 **	Process
 */
-void	ssl_main_process(char **av, t_ssl *ssl);
+void				ssl_main_process(char **av, t_ssl *ssl);
 
-void	init_ssl_arg(t_arg *arg);
-void	clear_ssl_arg(t_arg *arg);
+void				init_ssl_arg(t_arg *arg);
+void				clear_ssl_arg(t_arg *arg);
+
+/*
+** Debug
+*/
+void				debug_arg(t_arg *arg);
 
 #endif

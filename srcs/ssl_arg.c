@@ -15,7 +15,7 @@
 
 void	init_ssl_arg(t_arg *arg)
 {
-	arg->arg_type = 0;
+	arg->type = -1;
 	arg->filename = NULL;
 	arg->fd = -1;
 	arg->argument.content = NULL;
@@ -25,4 +25,5 @@ void	init_ssl_arg(t_arg *arg)
 void	clear_ssl_arg(t_arg *arg)
 {
 	ft_memdel(&(arg->argument.content));
+	close(arg->fd);
 }

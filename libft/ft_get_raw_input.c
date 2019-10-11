@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_get_raw_stdin.c                               .::    .:/ .      .::   */
+/*   ft_get_raw_input.c                               .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tle-coza <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -16,15 +16,15 @@
 void	ft_get_raw_input(int fd, t_mem *memory)
 {
 	uint8_t	*input;
-	char	buffer[5];
+	char	buffer[513];
 	int		retread;
 	size_t	len;
 
 	input = NULL;
 	retread = 0;
 	len = 0;
-	ft_bzero(buffer, 5);
-	while ((retread = read(fd, buffer, 4)))
+	ft_bzero(buffer, 513);
+	while ((retread = read(fd, buffer, 512)))
 	{
 		input = ft_mem_joinordup(input, buffer, len, retread);
 		len += retread;

@@ -14,40 +14,63 @@
 #include "../includes/ft_ssl.h"
 #include <stdio.h>
 
-static int	process_str(char **av, t_arg *arg)
+static int	process_file(char **filename, t_arg *arg)
 {
-	// dprintf(1, "process_str\n");
-	arg->arg_type = STR;
-	if (*(*av + 1) == '\0')
+	arg->type = FILE;
+	arg->filename = *filename;
+	if ((arg->fd = ft_get_fd_read(arg->filename)) == -1)
 	{
-		av++;
-		arg->argument.content = ft_strdup(*av);
+		ft_putstr_fd("ft_ssl: Cannot open `", 2);
+		ft_putstr_fd(arg->filename, 2);
+		ft_putendl_fd("'", 2);
 		return (1);
 	}
-	else
-		arg->argument.content = ft_strdup((*av + 1));
+	ft_get_raw_input(arg->fd, &(arg->argument));
 	return (0);
 }
 
-static int	process_opt(char **av, t_arg *arg, t_ssl *ssl)
+/*
+** End up here if `s' option is found
+*/
+static int	process_str(char ***av, t_arg *arg)
 {
-	// dprintf(1, "process_opt\n");
-	int	ret;
-
-	ret = 0;
-	while (**av)
+	// dprintf(1, "process_str\n");
+	**av += 1;
+	if (!***av && *(*av + 1))
 	{
-		if (**av == '-')
-			ssl->only_file = 1;
-		if (**av == 's')
-			ret = process_str(av, arg);
-		if (**av)
-			*av += 1;
+		*av += 1;
+		arg->argument.content = ft_strdup(**av);
+		arg->argument.len = ft_strlen(arg->argument.content);
 	}
-	return (ret);
+	else if ((***av) && *(**av +1))
+	{
+		arg->argument.content = ft_strdup(**av);
+		arg->argument.len = ft_strlen(arg->argument.content);
+	}
+	else
+		return (ssl_opt_usage('s', MISS_ARG));
+	arg->type = STR;
+	return (0);
 }
 
-static int	process_arg(char **av, t_ssl *ssl)
+static int	process_opt(char ***av, t_arg *arg, t_ssl *ssl)
+{
+	// dprintf(1, "process_opt\n");
+	while (***av)
+	{
+		if (***av == '-')
+		{
+			(void)ssl->only_file;
+		}
+		else if (***av == 's')
+			return (process_str(av, arg));
+		if (***av)
+			**av += 1;
+	}
+	return (0);
+}
+
+static int	process_arg(char ***av, t_ssl *ssl)
 {
 	// dprintf(1, "process_arg\n");
 	t_arg	arg;
@@ -55,9 +78,14 @@ static int	process_arg(char **av, t_ssl *ssl)
 
 	ret = 0;
 	init_ssl_arg(&arg);
-	if (*av[0] == '-' && !ssl->only_file)
-		ret =process_opt(av, &arg, ssl);
-	// dprintf(1, "%s\n", arg.argument.content);
+	
+	if (**av[0] == '-' && !ssl->only_file)
+		process_opt(av, &arg, ssl);
+	else
+		process_file(*av, &arg);
+	
+	debug_arg(&arg);
+
 	clear_ssl_arg(&arg);
 	return (ret);
 }
@@ -67,9 +95,9 @@ void	ssl_main_process(char **av, t_ssl *ssl)
 	// dprintf(1, "ssl_main_process\n");
 	while (*av)
 	{
-		dprintf(1, "current av = [%s]\n", *av);
-		av += process_arg(av, ssl);
+		// dprintf(1, "current arg : [%s]\n", *av);
+		process_arg(&av, ssl);
 		if (*av)
-		av++;
+			av++;
 	}
 }

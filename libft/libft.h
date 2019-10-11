@@ -281,5 +281,5 @@ void				ft_free_hashtable(t_hash_table **hashtable);
 int					ft_getc(int fd);
 int					ft_getchar(void);
 int					get_shell_line(int fd, char **line);
-void				ft_get_raw_stdin(int fd, t_mem *memory);
+void				ft_get_raw_input(int fd, t_mem *memory);
 #endif

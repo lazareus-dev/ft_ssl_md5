@@ -63,7 +63,7 @@ SRCS	= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		  \
 		  ft_trie_search.c ft_new_trie.c ft_push_trie.c ft_free_trie.c \
 		  \
-		  ft_memdup.c ft_get_raw_stdin.c
+		  ft_memdup.c ft_get_raw_input.c
 
 
 PFSRC	= ft_printf.c check_spec.c get_spec.c parse_args.c argsize.c \

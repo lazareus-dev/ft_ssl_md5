@@ -44,9 +44,12 @@ int			usage_invalid_cmd(char *cmd)
 	return (1);
 }
 
-int			ssl_opt_usage(char c)
+int			ssl_opt_usage(char c, int type)
 {
-	ft_putstr_fd("md5: illegal option -- ", 2);
+	if (type == ILLEGAL)
+		ft_putstr_fd("ft_ssl: illegal option -- ", 2);
+	else if (type == MISS_ARG)
+		ft_putstr_fd("ft_ssl: option requires an argument -- ", 2);
 	ft_putchar_fd(c, 2);
 	ft_putendl_fd("\nusage: ft_ssl command [-pqr] [-s string] [files ...]", 2);
 	return (1);
