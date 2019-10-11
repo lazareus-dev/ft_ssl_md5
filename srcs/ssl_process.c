@@ -42,7 +42,7 @@ static int	process_str(char ***av, t_arg *arg)
 		arg->argument.content = ft_strdup(**av);
 		arg->argument.len = ft_strlen(arg->argument.content);
 	}
-	else if ((***av) && *(**av +1))
+	else if ((***av))
 	{
 		arg->argument.content = ft_strdup(**av);
 		arg->argument.len = ft_strlen(arg->argument.content);
@@ -71,7 +71,11 @@ static int	process_opt(char ***av, t_arg *arg, t_ssl *ssl)
 	{
 		if (***av == '-')
 			return(handle_dash(**av, ssl));
-		else if (***av == 's')
+		if (***av == 'q')
+			ssl->quiet = 1;
+		if (***av == 'r')
+			ssl->reverse = 1;
+		if (***av == 's')
 			return (process_str(av, arg));
 		if (***av)
 			**av += 1;
