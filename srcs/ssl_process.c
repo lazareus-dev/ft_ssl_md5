@@ -37,6 +37,7 @@ static int	process_file(char **filename, t_arg *arg, t_ssl *ssl)
 static int	process_str(char ***av, t_arg *arg, t_ssl *ssl)
 {
 	// dprintf(1, "process_str\n");
+	(void)ssl;
 	**av += 1;
 	if (!***av && *(*av + 1))
 	{
@@ -74,12 +75,17 @@ static int	process_opt(char ***av, t_arg *arg, t_ssl *ssl)
 	{
 		if (***av == '-')
 			return(handle_dash(**av, ssl));
-		if (***av == 'q')
+		else if (***av == 'q')
 			ssl->quiet = 1;
-		if (***av == 'r')
+		else if (***av == 'r')
 			ssl->reverse = 1;
-		if (***av == 's')
+		else if (***av == 's')
 			return (process_str(av, arg, ssl));
+		else
+		{
+			ssl->exit = 1;
+			return (ssl_opt_usage(***av, ILLEGAL));
+		}
 		if (***av)
 			**av += 1;
 	}

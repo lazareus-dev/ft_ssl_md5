@@ -15,5 +15,5 @@
 
 void	ssl_md5(uint8_t *input)
 {
-	dprintf(1, "HASHED%sHASHED", input);
+	dprintf(1, "HASHED%sHASHED\n", input);
 }
