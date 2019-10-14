@@ -18,7 +18,8 @@ CC = clang
 FLAGS		= 	-Wall -Wextra -Werror -O2 -g
 
 SSL_MD5		=	$(addprefix ssl_md5/, \
-				ssl_md5.c, md5_aux.c)
+				ssl_md5.c md5_aux.c md5_transformation_fcts.c md5_final.c \
+				md5_transform.c md5_transform_apply.c md5_update.c)
 
 SSL_SHA256		=	$(addprefix ssl_sha256/, \
 				ssl_sha256.c)

@@ -13,7 +13,8 @@
 
 #include "../../includes/ft_ssl.h"
 
-void	ssl_sha256(uint8_t *input)
+void	ssl_sha256(uint8_t *input, size_t size)
 {
+	(void)size;
     dprintf(1, "HASHED%sHASHED\n", input);
 }

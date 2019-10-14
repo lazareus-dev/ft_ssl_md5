@@ -14,8 +14,22 @@
 #include "../../includes/ft_ssl.h"
 #include "../../includes/ssl_md5.h"
 
-uint8_t	*ssl_md5(uint8_t *input)
+void	print_hash(char hash[])
 {
+	int	i;
+
+	i = 0;
+	while (i < 16)
+	{
+		ft_printf("%02x", hash[i]);
+		i++;
+	}
+	ft_putchar('\n');
+}
+
+uint8_t	*ssl_md5(uint8_t *input, size_t size)
+{
+	(void)size;
 	return (input);
 }
 

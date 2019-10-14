@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ssl_hashing.c                                    .::    .:/ .      .::   */
+/*   md5_update.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tle-coza <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/14 11:08:39 by tle-coza     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/14 11:08:40 by tle-coza    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/14 18:31:41 by tle-coza     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/14 18:37:43 by tle-coza    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/ft_ssl.h"
+#include "../../includes/ft_ssl.h"
+#include "../../includes/ssl_md5.h"
 
-int ssl_hashing(t_arg *arg, t_ssl *ssl)
+void	ssl_md5_update(t_md5_ctx *ctx, uint8_t data[], size_t size)
 {
-	dprintf(1, "HASH = [%s]\n", ssl->hashfct(arg->argument.content,
-		arg->argument.len));
-    return (0);
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		ctx->data[ctx->datalen] = data[i];
+		ctx->datalen++;
+		if (ctx->datalen == 64)
+		{
+			md5_transform(ctx, ctx->data);
+			dbl_int_add(ctx->bitlen[0], ctx->bitlen[1], 512);
+			ctx->datalen = 0;
+		}
+		i++;
+	}
 }
