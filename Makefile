@@ -6,7 +6,7 @@
 #    By: tle-coza <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/10 10:53:13 by tle-coza     #+#   ##    ##    #+#        #
-#    Updated: 2019/10/10 11:01:52 by tle-coza    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/10/14 15:15:41 by tle-coza    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -18,12 +18,13 @@ CC = clang
 FLAGS		= 	-Wall -Wextra -Werror -O2 -g
 
 SSL_MD5		=	$(addprefix ssl_md5/, \
-				ssl_md5.c)
+				ssl_md5.c, md5_aux.c)
 
 SSL_SHA256		=	$(addprefix ssl_sha256/, \
 				ssl_sha256.c)
 
-FILENAMES   =   main.c ssl_usage.c ssl_process.c ssl_arg.c debug.c\
+FILENAMES   =   main.c ssl_hashing.c ssl_usage.c ssl_process.c ssl_arg.c \
+				debug.c \
 				$(SSL_MD5) \
 				$(SSL_SHA256) \
 

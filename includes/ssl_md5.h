@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ssl_md5.c                                        .::    .:/ .      .::   */
+/*   ssl_md5.h                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tle-coza <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/10 15:41:45 by tle-coza     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 15:41:46 by tle-coza    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/14 13:07:41 by tle-coza     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/14 13:07:52 by tle-coza    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/ft_ssl.h"
-#include "../../includes/ssl_md5.h"
+#ifndef SSL_MD5_H
+# define SSL_MD5_H
 
-uint8_t	*ssl_md5(uint8_t *input)
+/*
+**	buffer: input data in 64bytes length
+**	datalen: data length
+**	bitlen:	data length in bits
+**	states: A, B, C, D
+*/
+typedef struct	s_md5_ctx
 {
-	return (input);
-}
+	uint8_t		buffer[64];
+	uint32_t	datalen;
+	uint32_t	bitlen[2];
+	uint32_t	state[4];
+}				t_md5_ctx;
 
-void	ssl_md5_init(t_md5_ctx *ctx)
-{
-	ctx->datalen = 0;
-	ctx->bitlen[0] = 0;
-	ctx->bitlen[1] = 0;
-	ctx->state[0] = 0x67452301;
-	ctx->state[1] = 0xEFCDAB89;
-	ctx->state[2] = 0x98BADCFE;
-	ctx->state[3] = 0x10325476;
-}
+uint8_t			*ssl_md5(uint8_t *input);
+void			ssl_md5_init(t_md5_ctx *ctx);
+void			ssl_md5_update(t_md5_ctx *ctx);
+void			ssl_md5_final(t_md5_ctx *ctx);
+
+#endif

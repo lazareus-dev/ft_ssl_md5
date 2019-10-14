@@ -12,6 +12,8 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_ssl.h"
+#include "../includes/ssl_md5.h"
+#include "../includes/ssl_sha256.h"
 
 void	init_ssl(t_ssl *ssl)
 {

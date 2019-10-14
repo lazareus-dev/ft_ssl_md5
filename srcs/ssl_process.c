@@ -16,7 +16,6 @@
 
 static int	process_file(char **filename, t_arg *arg, t_ssl *ssl)
 {
-	(void)ssl;
 	arg->type = FILE;
 	arg->filename = *filename;
 	if ((arg->fd = ft_get_fd_read(arg->filename)) == -1)
@@ -27,7 +26,7 @@ static int	process_file(char **filename, t_arg *arg, t_ssl *ssl)
 		return (1);
 	}
 	ft_get_raw_input(arg->fd, &(arg->argument));
-	ssl->hashfct(arg->argument.content);	
+	ssl_hashing(arg, ssl);
 	return (0);
 }
 
@@ -36,8 +35,6 @@ static int	process_file(char **filename, t_arg *arg, t_ssl *ssl)
 */
 static int	process_str(char ***av, t_arg *arg, t_ssl *ssl)
 {
-	// dprintf(1, "process_str\n");
-	(void)ssl;
 	**av += 1;
 	if (!***av && *(*av + 1))
 	{
@@ -53,7 +50,7 @@ static int	process_str(char ***av, t_arg *arg, t_ssl *ssl)
 	else
 		return (ssl_opt_usage('s', MISS_ARG));
 	arg->type = STR;
-	ssl->hashfct(arg->argument.content);	
+	ssl_hashing(arg, ssl);
 	return (0);
 }
 
