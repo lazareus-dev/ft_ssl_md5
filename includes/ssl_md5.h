@@ -64,7 +64,7 @@ uint8_t			*ssl_md5(uint8_t *input, size_t size);
 void			ssl_md5_init(t_md5_ctx *ctx);
 void			ssl_md5_update(t_md5_ctx *ctx, uint8_t data[], size_t size);
 void			md5_transform(t_md5_ctx *ctx, uint8_t *data);
-void			ssl_md5_final(t_md5_ctx *ctx);
+uint8_t			*ssl_md5_final(t_md5_ctx *ctx);
 
 /*
 **	Auxiliary functions
