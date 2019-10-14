@@ -31,18 +31,6 @@
 # define S43 15
 # define S44 21
 
-typedef struct s_md5_trsf_param
-{
-	uint32_t	a;
-	uint32_t	b;
-	uint32_t	c;
-	uint32_t	d;
-	uint32_t	x;
-	uint32_t	s;
-	uint32_t	ac;
-}				t_md5_trsf_param;
-
-
 typedef struct	s_md5_transform
 {
 	uint32_t	a;
@@ -93,10 +81,14 @@ uint64_t		dbl_int_add(uint32_t a, uint32_t b, uint32_t c);
 **	Transformation functions
 */
 
-uint32_t		md5_ff(t_md5_trsf_param *param);
-uint32_t		md5_gg(t_md5_trsf_param *param);
-uint32_t		md5_hh(t_md5_trsf_param *param);
-uint32_t		md5_ii(t_md5_trsf_param *param);
+uint32_t		md5_ff(t_md5_transform *param, uint32_t m,
+	uint32_t s, uint32_t t);
+uint32_t		md5_gg(t_md5_transform *param, uint32_t m,
+	uint32_t s, uint32_t t);
+uint32_t		md5_hh(t_md5_transform *param, uint32_t m,
+	uint32_t s, uint32_t t);
+uint32_t		md5_ii(t_md5_transform *param, uint32_t m,
+	uint32_t s, uint32_t t);
 
 /*
 ** Apply transformation functions

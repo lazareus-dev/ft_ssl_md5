@@ -20,7 +20,7 @@
 **	re-reverse them on output (in md5_final()).
 */
 
-static void	reverse(uint32_t *m[], uint32_t *data)
+static void	reverse(t_md5_transform *param, uint8_t *data)
 {
 	int		i;
 	int		j;
@@ -29,7 +29,7 @@ static void	reverse(uint32_t *m[], uint32_t *data)
 	j = 0;
 	while (i < 16)
 	{
-		m[i] = (data[j]) + (data[j + 1] << 8) + (data[j + 2] << 16)
+		param->m[i] = (data[j]) + (data[j + 1] << 8) + (data[j + 2] << 16)
 			+ (data[j + 3] << 24);
 		i++;
 		j += 4;
@@ -44,7 +44,7 @@ void		md5_transform(t_md5_ctx *ctx, uint8_t *data)
 	param.b = ctx->state[1];
 	param.c = ctx->state[2];
 	param.d = ctx->state[3];
-	reverse(&(param.m), data);
+	reverse(&param, data);
 	apply_ff(&param);
 	apply_gg(&param);
 	apply_hh(&param);
