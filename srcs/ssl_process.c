@@ -16,6 +16,7 @@
 
 static int	process_file(char **filename, t_arg *arg, t_ssl *ssl)
 {
+	(void)ssl;
 	arg->type = FILE;
 	arg->filename = *filename;
 	if ((arg->fd = ft_get_fd_read(arg->filename)) == -1)

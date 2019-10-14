@@ -43,7 +43,7 @@ typedef struct		s_ssl
 	short			reverse;
 	short			quiet;
 	short			only_file;
-	void			(*hashfct)(uint8_t *);
+	void			(*hashfct)(uint8_t *input);
 	int				ret;
 	int				exit;
 }					t_ssl;
@@ -59,7 +59,7 @@ int					ssl_opt_usage(char c, int type);
 ** Hash functions
 */
 void				ssl_md5(uint8_t *);
-void				ssl_sha256(void);
+void				ssl_sha256(uint8_t *);
 
 /*
 **	Process

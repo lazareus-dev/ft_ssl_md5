@@ -40,9 +40,9 @@ int		main(int ac, char **av)
 
 	if (ac == 1)
 		return (ssl_usage());
+	init_ssl(&ssl);
 	if (ssl_get_cmd(&ssl, av[1]) == -1)
 		return (usage_invalid_cmd(av[1]));
-	init_ssl(&ssl);
 	ssl_main_process(av + 2, &ssl);
 	return (0);
 }
