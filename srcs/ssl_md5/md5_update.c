@@ -26,7 +26,7 @@ void	ssl_md5_update(t_md5_ctx *ctx, uint8_t data[], size_t size)
 		if (ctx->datalen == 64)
 		{
 			md5_transform(ctx, ctx->data);
-			dbl_int_add(ctx->bitlen[0], ctx->bitlen[1], 512);
+			dbl_int_add(&(ctx->bitlen[0]), &(ctx->bitlen[1]), 512);
 			ctx->datalen = 0;
 		}
 		i++;

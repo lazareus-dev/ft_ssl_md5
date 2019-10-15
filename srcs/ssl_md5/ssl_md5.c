@@ -44,8 +44,10 @@ uint8_t	*ssl_md5(uint8_t *input, size_t size)
 
 	(void)size;
 	ssl_md5_init(&ctx);
+	// debug_md5_ctx(&ctx);
 	ssl_md5_update(&ctx, input, size);
-	
+	// debug_md5_ctx(&ctx);
+
 	print_hash(ssl_md5_final(&ctx));
 
 	return (input);

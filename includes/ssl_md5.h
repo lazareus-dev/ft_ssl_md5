@@ -75,7 +75,7 @@ uint32_t		md5_g(uint32_t x, uint32_t y, uint32_t z);
 uint32_t		md5_h(uint32_t x, uint32_t y, uint32_t z);
 uint32_t		md5_i(uint32_t x, uint32_t y, uint32_t z);
 
-uint64_t		dbl_int_add(uint32_t a, uint32_t b, uint32_t c);
+uint64_t		dbl_int_add(uint32_t *a, uint32_t *b, uint32_t c);
 
 /*
 **	Transformation functions
@@ -99,5 +99,11 @@ void			apply_gg(t_md5_transform *p);
 void			apply_hh(t_md5_transform *p);
 void			apply_ii(t_md5_transform *p);
 
+/*
+** Debug
+*/
+
+void				debug_params(t_md5_transform *param);
+void				debug_md5_ctx(t_md5_ctx *ctx);
 
 #endif

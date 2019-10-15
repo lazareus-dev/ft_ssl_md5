@@ -44,7 +44,9 @@ void		md5_transform(t_md5_ctx *ctx, uint8_t *data)
 	param.b = ctx->state[1];
 	param.c = ctx->state[2];
 	param.d = ctx->state[3];
+	// debug_md5_ctx(ctx);
 	reverse(&param, data);
+	// debug_md5_ctx(ctx);
 	apply_ff(&param);
 	apply_gg(&param);
 	apply_hh(&param);

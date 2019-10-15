@@ -16,6 +16,7 @@
 
 void	apply_ff(t_md5_transform *p)
 {
+	// debug_params(p);
 	md5_ff(p, p->m[0], S11, 0xd76aa478);
 	md5_ff(p, p->m[1], S12, 0xe8c7b756);
 	md5_ff(p, p->m[2], S13, 0x242070db);
@@ -32,6 +33,7 @@ void	apply_ff(t_md5_transform *p)
 	md5_ff(p, p->m[13], S12, 0xfd987193);
 	md5_ff(p, p->m[14], S13, 0xa679438e);
 	md5_ff(p, p->m[15], S14, 0x49b40821);
+	// debug_params(p);
 }
 
 void	apply_gg(t_md5_transform *p)

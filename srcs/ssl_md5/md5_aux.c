@@ -38,10 +38,10 @@ uint32_t	md5_i(uint32_t x, uint32_t y, uint32_t z)
 ** adds c to it
 */
 
-uint64_t	dbl_int_add(uint32_t a, uint32_t b, uint32_t c)
+uint64_t	dbl_int_add(uint32_t *a, uint32_t *b, uint32_t c)
 {
-	if (a > 0xffffffff - c)
-		++b;
-	a += c;
-	return (a);
+	if (*a > 0xffffffff - c)
+		++(*b);
+	*a = *a + c;
+	return (*a);
 }

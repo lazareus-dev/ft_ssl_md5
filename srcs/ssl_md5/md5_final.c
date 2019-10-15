@@ -64,7 +64,7 @@ uint8_t		*ssl_md5_final(t_md5_ctx *ctx)
 		md5_transform(ctx, ctx->data);
 		ft_memset(ctx->data, 0, 56);
 	}
-	dbl_int_add(ctx->bitlen[0], ctx->bitlen[1], 8 * ctx->datalen);
+	dbl_int_add(&(ctx->bitlen[0]), &(ctx->bitlen[1]), 8 * ctx->datalen);
 	padding_last_block(ctx);
 	md5_transform(ctx, ctx->data);
 	hash = reverse(ctx);
