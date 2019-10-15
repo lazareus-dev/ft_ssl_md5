@@ -36,7 +36,7 @@
 // 	}
 // }
 
-/* Decodes input (unsigned char) into output (UINT4). Assumes len is
+/* Decodes input (unsigned char) into output (uint32_t). Assumes len is
   a multiple of 4.
  */
 static void decode(uint32_t *output, uint8_t *input, size_t len)
@@ -68,5 +68,5 @@ void		md5_transform(t_md5_ctx *ctx, uint8_t *data)
 	ctx->state[2] += param.c;
 	ctx->state[3] += param.d;
 
-	ft_memset((uint8_t *)x, 0, sizeof(x));
+	// ft_memset((uint8_t *)x, 0, sizeof(x));
 }

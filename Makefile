@@ -6,7 +6,7 @@
 #    By: tle-coza <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/10 10:53:13 by tle-coza     #+#   ##    ##    #+#        #
-#    Updated: 2019/10/15 13:31:48 by tle-coza    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/10/15 15:51:47 by tle-coza    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -53,7 +53,7 @@ lib:
 			make -C $(L_FT); \
 		fi;
 
-$(NAME): $(OBJECTS) #lib
+$(NAME): $(OBJECTS) lib
 		@echo "\033[0;96m$(NAME): Compiling ⏳️\033[0m"
 		@$(CC) -I ./includes $(OBJECTS) $(TERMCAP_LNK) $(LIB_LNK) -o $@
 		@echo "\033[1;34m~ Welcome to LazySH ~\033[0m"
@@ -62,13 +62,13 @@ $(NAME): $(OBJECTS) #lib
 	    @$(CC) $(FLAGS) $(LIB_INC) -I ./includes -c $< -o $@
 
 clean:
-		#@$(MAKE) -C $(L_FT) clean
+		@$(MAKE) -C $(L_FT) clean
 		@rm -rf $(OBJECTS)
 		@echo "\033[0;32m$(NAME): Spotless ✨\033[0m"
 
 fclean: clean
 		@rm -rf $(NAME)
-		#@$(MAKE) -C $(L_FT) fclean
+		@$(MAKE) -C $(L_FT) fclean
 
 clear:
 		@$(MAKE) all

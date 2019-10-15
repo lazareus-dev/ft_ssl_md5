@@ -30,18 +30,18 @@ void	print_hash(uint8_t *hash)
 
 /* Prints a message digest in hexadecimal.
  */
-static void md5_print(uint8_t digest[16])
+static void		md5_print(uint8_t digest[16])
 {
-	unsigned int i;
+	size_t		i;
 
 	for (i = 0; i < 16; i++)
 		ft_printf("%02x", digest[i]);
 }
 
-uint8_t	*ssl_md5(uint8_t *input, size_t size)
+uint8_t			*ssl_md5(uint8_t *input, size_t size)
 {
 	t_md5_ctx	ctx;
-	unsigned char digest[16];
+	uint8_t		digest[16];
 
 	(void)size;
 

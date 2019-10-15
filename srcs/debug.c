@@ -25,10 +25,9 @@ void	debug_params(t_md5_transform *param)
 void	debug_md5_ctx(t_md5_ctx *ctx)
 {
 	dprintf(1, "***DEBUG CTX***\n");
-	for (size_t i = 0; i < ctx->datalen; i++)
+	for (size_t i = 0; i < 64; i++)
 		dprintf(1, "\tdata = [%c]\n", ctx->data[i]);
-	dprintf(1, "\tdatalen = [%zu]\n", ctx->datalen);
-	dprintf(1, "\tbitlen[0],[1] = [%u],[%d]\n", ctx->bitlen[0], ctx->bitlen[1]);
+	dprintf(1, "\tbitlen[0],[1] = [%u],[%u]\n", ctx->bitlen[0], ctx->bitlen[1]);
 	for (size_t i = 0; i < 4; i++)
 		dprintf(1, "\tstate[%zu] = [%u]\n", i, ctx->state[i]);
 }

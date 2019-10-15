@@ -54,7 +54,6 @@ typedef struct	s_md5_transform
 typedef struct	s_md5_ctx
 {
 	uint8_t		data[64];
-	size_t		datalen;
 	uint32_t	bitlen[2];
 	uint32_t	state[4];
 }				t_md5_ctx;
@@ -79,7 +78,7 @@ uint32_t		md5_g(uint32_t x, uint32_t y, uint32_t z);
 uint32_t		md5_h(uint32_t x, uint32_t y, uint32_t z);
 uint32_t		md5_i(uint32_t x, uint32_t y, uint32_t z);
 
-uint64_t		dbl_int_add(uint32_t *a, uint32_t *b, uint32_t c);
+uint32_t		dbl_int_add(uint32_t *a, uint32_t *b, uint32_t c);
 
 /*
 **	Transformation functions

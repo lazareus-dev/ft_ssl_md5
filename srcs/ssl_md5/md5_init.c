@@ -16,11 +16,10 @@
 
 void	ssl_md5_init(t_md5_ctx *ctx)
 {
-	ctx->datalen = 0;
 	ctx->bitlen[0] = 0;
 	ctx->bitlen[1] = 0;
 	ctx->state[0] = 0x67452301;
-	ctx->state[1] = 0xEFCDAB89;
-	ctx->state[2] = 0x98BADCFE;
+	ctx->state[1] = 0xefcdab89;
+	ctx->state[2] = 0x98badcfe;
 	ctx->state[3] = 0x10325476;
 }

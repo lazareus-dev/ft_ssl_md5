@@ -20,10 +20,16 @@ void		ssl_md5_update(t_md5_ctx *ctx, uint8_t *input, size_t input_len)
 	size_t	index;
 	size_t	part_len;
 
-	index = (uint32_t)((ctx->bitlen[0] >> 3) & 0x3F);
+	index = (size_t)((ctx->bitlen[0] >> 3) & 0x3F);
+	dprintf(1, "index = [%zu]\n", index);
 	if ((ctx->bitlen[0] += ((uint32_t)input_len << 3)) < ((uint32_t)input_len << 3))
+	{
+		dprintf(1, "TRUUUUE");
 		ctx->bitlen[1]++;
+	}
+	dprintf(1, "TRUC = [%u]\n", ((uint32_t)input_len >> 29));
 	ctx->bitlen[1] += ((uint32_t)input_len >> 29);
+	dprintf(1, "bitlen[1] = [%u]\n", ctx->bitlen[1]);
 
  	part_len = 64 - index;
 
