@@ -13,6 +13,7 @@
 
 #include "../../includes/ft_ssl.h"
 #include "../../includes/ssl_md5.h"
+#include <stdio.h>
 
 void	print_hash(uint8_t *hash)
 {
@@ -27,28 +28,29 @@ void	print_hash(uint8_t *hash)
 	ft_putchar('\n');
 }
 
-void	ssl_md5_init(t_md5_ctx *ctx)
+/* Prints a message digest in hexadecimal.
+ */
+static void md5_print(uint8_t digest[16])
 {
-	ctx->datalen = 0;
-	ctx->bitlen[0] = 0;
-	ctx->bitlen[1] = 0;
-	ctx->state[0] = 0x67452301;
-	ctx->state[1] = 0xEFCDAB89;
-	ctx->state[2] = 0x98BADCFE;
-	ctx->state[3] = 0x10325476;
+	unsigned int i;
+
+	for (i = 0; i < 16; i++)
+		ft_printf("%02x", digest[i]);
 }
 
 uint8_t	*ssl_md5(uint8_t *input, size_t size)
 {
 	t_md5_ctx	ctx;
+	unsigned char digest[16];
 
 	(void)size;
+
 	ssl_md5_init(&ctx);
-	// debug_md5_ctx(&ctx);
 	ssl_md5_update(&ctx, input, size);
-	// debug_md5_ctx(&ctx);
+	ssl_md5_final(digest, &ctx);
 
-	print_hash(ssl_md5_final(&ctx));
-
+	ft_printf("MD5 (\"%s\") = ", input);
+	md5_print(digest);
+	ft_printf("\n");
 	return (input);
 }

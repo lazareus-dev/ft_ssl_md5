@@ -20,39 +20,53 @@
 **	re-reverse them on output (in md5_final()).
 */
 
-static void	reverse(t_md5_transform *param, uint8_t *data)
-{
-	int		i;
-	int		j;
+// static void	reverse(t_md5_transform *param, uint8_t *data)
+// {
+// 	int		i;
+// 	int		j;
 
-	i = 0;
-	j = 0;
-	while (i < 16)
-	{
-		param->m[i] = (data[j]) + (data[j + 1] << 8) + (data[j + 2] << 16)
-			+ (data[j + 3] << 24);
-		i++;
-		j += 4;
-	}
+// 	i = 0;
+// 	j = 0;
+// 	while (i < 16)
+// 	{
+// 		param->m[i] = (data[j]) + (data[j + 1] << 8) + (data[j + 2] << 16)
+// 			+ (data[j + 3] << 24);
+// 		i++;
+// 		j += 4;
+// 	}
+// }
+
+/* Decodes input (unsigned char) into output (UINT4). Assumes len is
+  a multiple of 4.
+ */
+static void decode(uint32_t *output, uint8_t *input, size_t len)
+{
+	size_t	i;
+	size_t	j;
+
+	for (i = 0, j = 0; j < len; i++, j += 4)
+		output[i] = ((uint32_t)input[j]) | (((uint32_t)input[j+1]) << 8) |
+			(((uint32_t)input[j+2]) << 16) | (((uint32_t)input[j+3]) << 24);
 }
 
 void		md5_transform(t_md5_ctx *ctx, uint8_t *data)
 {
 	t_md5_transform param;
+	uint32_t		x[16];
 
 	param.a = ctx->state[0];
 	param.b = ctx->state[1];
 	param.c = ctx->state[2];
 	param.d = ctx->state[3];
-	// debug_md5_ctx(ctx);
-	reverse(&param, data);
-	// debug_md5_ctx(ctx);
-	apply_ff(&param);
-	apply_gg(&param);
-	apply_hh(&param);
-	apply_ii(&param);
+	decode(x, data, 64);
+	apply_ff(&param, x);
+	apply_gg(&param, x);
+	apply_hh(&param, x);
+	apply_ii(&param, x);
 	ctx->state[0] += param.a;
 	ctx->state[1] += param.b;
 	ctx->state[2] += param.c;
 	ctx->state[3] += param.d;
+
+	ft_memset((uint8_t *)x, 0, sizeof(x));
 }

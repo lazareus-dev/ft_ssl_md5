@@ -14,6 +14,10 @@
 #ifndef SSL_MD5_H
 # define SSL_MD5_H
 
+/*
+** Constants for md5_transform routine
+*/
+
 # define S11 7
 # define S12 12
 # define S13 17
@@ -64,7 +68,7 @@ uint8_t			*ssl_md5(uint8_t *input, size_t size);
 void			ssl_md5_init(t_md5_ctx *ctx);
 void			ssl_md5_update(t_md5_ctx *ctx, uint8_t data[], size_t size);
 void			md5_transform(t_md5_ctx *ctx, uint8_t *data);
-uint8_t			*ssl_md5_final(t_md5_ctx *ctx);
+void			ssl_md5_final(uint8_t digest[16], t_md5_ctx *ctx);
 
 /*
 **	Auxiliary functions
@@ -79,6 +83,7 @@ uint64_t		dbl_int_add(uint32_t *a, uint32_t *b, uint32_t c);
 
 /*
 **	Transformation functions
+** 	for rounds 1, 2, 3, and 4
 */
 
 uint32_t		md5_ff(t_md5_transform *param, uint32_t m,
@@ -94,10 +99,10 @@ uint32_t		md5_ii(t_md5_transform *param, uint32_t m,
 ** Apply transformation functions
 */
 
-void			apply_ff(t_md5_transform *p);
-void			apply_gg(t_md5_transform *p);
-void			apply_hh(t_md5_transform *p);
-void			apply_ii(t_md5_transform *p);
+void			apply_ff(t_md5_transform *p, uint32_t x[16]);
+void			apply_gg(t_md5_transform *p, uint32_t x[16]);
+void			apply_hh(t_md5_transform *p, uint32_t x[16]);
+void			apply_ii(t_md5_transform *p, uint32_t x[16]);
 
 /*
 ** Debug
