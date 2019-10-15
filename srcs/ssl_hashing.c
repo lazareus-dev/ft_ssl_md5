@@ -13,7 +13,7 @@
 
 #include "../includes/ft_ssl.h"
 
-int ssl_hashing(t_arg *arg, t_ssl *ssl)
+int	ssl_hashing(t_arg *arg, t_ssl *ssl)
 {
 	if (!ssl->quiet && arg->type == FILE)
 		ft_printf("MD5 (%s) = ", arg->filename);

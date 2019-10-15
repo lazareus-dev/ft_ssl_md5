@@ -32,7 +32,7 @@ static void	encode(uint8_t *output, uint32_t *input, size_t len)
 		output[j + 1] = (unsigned char)((input[i] >> 8) & 0xff);
 		output[j + 2] = (unsigned char)((input[i] >> 16) & 0xff);
 		output[j + 3] = (unsigned char)((input[i] >> 24) & 0xff);
-		i++;
+		i += 1;
 		j += 4;
 	}
 }

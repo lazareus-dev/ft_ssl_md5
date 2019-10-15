@@ -23,7 +23,8 @@ SSL_MD5		=	$(addprefix ssl_md5/, \
 				md5_init.c)
 
 SSL_SHA256		=	$(addprefix ssl_sha256/, \
-				ssl_sha256.c)
+				ssl_sha256.c sha256_aux_fcts1.c sha256_aux_fcts2.c \
+				sha256_final.c sha256_init.c sha256_transform.c sha256_update.c)
 
 FILENAMES   =   main.c ssl_hashing.c ssl_usage.c ssl_process.c ssl_arg.c \
 				debug.c \
@@ -56,7 +57,7 @@ lib:
 $(NAME): $(OBJECTS) lib
 		@echo "\033[0;96m$(NAME): Compiling ⏳️\033[0m"
 		@$(CC) -I ./includes $(OBJECTS) $(TERMCAP_LNK) $(LIB_LNK) -o $@
-		@echo "\033[1;34m~ Welcome to LazySH ~\033[0m"
+		@echo "\033[1;34m~ Welcome to ft_ssl ~\033[0m"
 
 %.o: ./%.c
 	    @$(CC) $(FLAGS) $(LIB_INC) -I ./includes -c $< -o $@

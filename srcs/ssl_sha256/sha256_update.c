@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ssl_sha256.c                                     .::    .:/ .      .::   */
+/*   sha256_update.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tle-coza <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/10 15:41:58 by tle-coza     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 15:41:59 by tle-coza    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/15 18:39:32 by tle-coza     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/15 18:39:34 by tle-coza    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,25 +14,21 @@
 #include "../../includes/ft_ssl.h"
 #include "../../includes/ssl_sha256.h"
 
-static void	print_sha256(uint8_t *hash)
+void		ssl_sha256_update(t_sha256_ctx *ctx, const uint8_t data[], size_t len)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < 32)
+	while (i < len)
 	{
-		ft_printf("%02x", hash[i]);
+		ctx->data[ctx->datalen] = data[i];
+		ctx->datalen++;
+		if (ctx->datalen == 64)
+		{
+			sha256_transform(ctx, ctx->data);
+			ctx->bitlen += 512;
+			ctx->datalen = 0;
+		}
 		i++;
 	}
-}
-
-void	ssl_sha256(uint8_t *input, size_t size)
-{
-	t_sha256_ctx	ctx;
-	uint8_t			digest[16];
-
-	ssl_sha256_init(&ctx);
-	ssl_sha256_update(&ctx, input, size);
-	ssl_sha256_final(digest, &ctx);
-	print_sha256(digest);
 }
