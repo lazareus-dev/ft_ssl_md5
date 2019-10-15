@@ -37,6 +37,7 @@
 
 typedef struct	s_md5_transform
 {
+	uint32_t	p[4];
 	uint32_t	a;
 	uint32_t	b;
 	uint32_t	c;
@@ -58,7 +59,7 @@ typedef struct	s_md5_ctx
 	uint32_t	state[4];
 }				t_md5_ctx;
 
-uint8_t			*ssl_md5(uint8_t *input, size_t size);
+void			ssl_md5(uint8_t *input, size_t size);
 
 /*
 **	Process
@@ -85,13 +86,13 @@ uint32_t		dbl_int_add(uint32_t *a, uint32_t *b, uint32_t c);
 ** 	for rounds 1, 2, 3, and 4
 */
 
-uint32_t		md5_ff(t_md5_transform *param, uint32_t m,
+uint32_t		md5_ff(int turn, t_md5_transform *param, uint32_t m,
 	uint32_t s, uint32_t t);
-uint32_t		md5_gg(t_md5_transform *param, uint32_t m,
+uint32_t		md5_gg(int turn, t_md5_transform *param, uint32_t m,
 	uint32_t s, uint32_t t);
-uint32_t		md5_hh(t_md5_transform *param, uint32_t m,
+uint32_t		md5_hh(int turn, t_md5_transform *param, uint32_t m,
 	uint32_t s, uint32_t t);
-uint32_t		md5_ii(t_md5_transform *param, uint32_t m,
+uint32_t		md5_ii(int turn, t_md5_transform *param, uint32_t m,
 	uint32_t s, uint32_t t);
 
 /*

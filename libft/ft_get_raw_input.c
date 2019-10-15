@@ -16,15 +16,15 @@
 void	ft_get_raw_input(int fd, t_mem *memory)
 {
 	uint8_t	*input;
-	char	buffer[513];
+	char	buffer[4097];
 	int		retread;
 	size_t	len;
 
 	input = NULL;
 	retread = 0;
 	len = 0;
-	ft_bzero(buffer, 513);
-	while ((retread = read(fd, buffer, 512)))
+	ft_bzero(buffer, 4097);
+	while ((retread = read(fd, buffer, 4096)))
 	{
 		input = ft_mem_joinordup(input, buffer, len, retread);
 		len += retread;

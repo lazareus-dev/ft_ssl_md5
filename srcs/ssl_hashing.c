@@ -15,6 +15,11 @@
 
 int ssl_hashing(t_arg *arg, t_ssl *ssl)
 {
+	if (!ssl->quiet && arg->type == FILE)
+		ft_printf("MD5 (%s) = ", arg->filename);
+	else if (!ssl->quiet && arg->type == STR)
+		ft_printf("MD5 (\"%s\") = ", arg->argument.content);
 	ssl->hashfct(arg->argument.content, arg->argument.len);
+	ft_printf("\n");
     return (0);
 }

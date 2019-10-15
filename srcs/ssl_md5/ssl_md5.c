@@ -38,7 +38,7 @@ static void		md5_print(uint8_t digest[16])
 		ft_printf("%02x", digest[i]);
 }
 
-uint8_t			*ssl_md5(uint8_t *input, size_t size)
+void			ssl_md5(uint8_t *input, size_t size)
 {
 	t_md5_ctx	ctx;
 	uint8_t		digest[16];
@@ -49,8 +49,5 @@ uint8_t			*ssl_md5(uint8_t *input, size_t size)
 	ssl_md5_update(&ctx, input, size);
 	ssl_md5_final(digest, &ctx);
 
-	ft_printf("MD5 (\"%s\") = ", input);
 	md5_print(digest);
-	ft_printf("\n");
-	return (input);
 }

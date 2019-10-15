@@ -54,19 +54,19 @@ void		md5_transform(t_md5_ctx *ctx, uint8_t *data)
 	t_md5_transform param;
 	uint32_t		x[16];
 
-	param.a = ctx->state[0];
-	param.b = ctx->state[1];
-	param.c = ctx->state[2];
-	param.d = ctx->state[3];
+	param.p[0] = ctx->state[0];
+	param.p[1] = ctx->state[1];
+	param.p[2] = ctx->state[2];
+	param.p[3] = ctx->state[3];
 	decode(x, data, 64);
 	apply_ff(&param, x);
 	apply_gg(&param, x);
 	apply_hh(&param, x);
 	apply_ii(&param, x);
-	ctx->state[0] += param.a;
-	ctx->state[1] += param.b;
-	ctx->state[2] += param.c;
-	ctx->state[3] += param.d;
+	ctx->state[0] += param.p[0];
+	ctx->state[1] += param.p[1];
+	ctx->state[2] += param.p[2];
+	ctx->state[3] += param.p[3];
 
 	// ft_memset((uint8_t *)x, 0, sizeof(x));
 }

@@ -14,6 +14,6 @@
 #ifndef SSL_SHA256_H
 # define SSL_SHA256_H
 
-uint8_t			*ssl_sha256(uint8_t *input, size_t size);
+void			ssl_sha256(uint8_t *input, size_t size);
 
 #endif

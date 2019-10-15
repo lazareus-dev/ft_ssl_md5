@@ -23,38 +23,38 @@ static uint32_t	rotate_left(uint32_t x, uint32_t n)
 	return ((x << n) | (x >> (32 - n)));
 }
 
-uint32_t		md5_ff(t_md5_transform *param, uint32_t m,
+uint32_t		md5_ff(int turn, t_md5_transform *param, uint32_t m,
 	uint32_t s, uint32_t t)
 {
-	param->a += md5_f(param->b, param->c, param->d) + m + t;
-	param->a = rotate_left(param->a, s);
-	param->a += param->b;
-	return (param->a);
+	param->p[turn % 4] += md5_f(param->p[(1 + turn) % 4], param->p[(2 + turn) % 4], param->p[(3 + turn) % 4]) + m + t;
+	param->p[turn % 4] = rotate_left(param->p[turn % 4], s);
+	param->p[turn % 4] += param->p[(1 + turn) % 4];
+	return (param->p[turn % 4]);
 }
 
-uint32_t		md5_gg(t_md5_transform *param, uint32_t m,
+uint32_t		md5_gg(int turn, t_md5_transform *param, uint32_t m,
 	uint32_t s, uint32_t t)
 {
-	param->a += md5_g(param->b, param->c, param->d) + m + t;
-	param->a = rotate_left(param->a, s);
-	param->a += param->b;
-	return (param->a);
+	param->p[turn % 4] += md5_g(param->p[(1 + turn) % 4], param->p[(2 + turn) % 4], param->p[(3 + turn) % 4]) + m + t;
+	param->p[turn % 4] = rotate_left(param->p[turn % 4], s);
+	param->p[turn % 4] += param->p[(1 + turn) % 4];
+	return (param->p[turn % 4]);
 }
 
-uint32_t		md5_hh(t_md5_transform *param, uint32_t m,
+uint32_t		md5_hh(int turn, t_md5_transform *param, uint32_t m,
 	uint32_t s, uint32_t t)
 {
-	param->a += md5_h(param->b, param->c, param->d) + m + t;
-	param->a = rotate_left(param->a, s);
-	param->a += param->b;
-	return (param->a);
+	param->p[turn % 4] += md5_h(param->p[(1 + turn) % 4], param->p[(2 + turn) % 4], param->p[(3 + turn) % 4]) + m + t;
+	param->p[turn % 4] = rotate_left(param->p[turn % 4], s);
+	param->p[turn % 4] += param->p[(1 + turn) % 4];
+	return (param->p[turn % 4]);
 }
 
-uint32_t		md5_ii(t_md5_transform *param, uint32_t m,
+uint32_t		md5_ii(int turn, t_md5_transform *param, uint32_t m,
 	uint32_t s, uint32_t t)
 {
-	param->a += md5_i(param->b, param->c, param->d) + m + t;
-	param->a = rotate_left(param->a, s);
-	param->a += param->b;
-	return (param->a);
+	param->p[turn % 4] += md5_i(param->p[(1 + turn) % 4], param->p[(2 + turn) % 4], param->p[(3 + turn) % 4]) + m + t;
+	param->p[turn % 4] = rotate_left(param->p[turn % 4], s);
+	param->p[turn % 4] += param->p[(1 + turn) % 4];
+	return (param->p[turn % 4]);
 }
