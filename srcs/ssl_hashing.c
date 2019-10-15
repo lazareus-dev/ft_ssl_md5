@@ -21,5 +21,5 @@ int	ssl_hashing(t_arg *arg, t_ssl *ssl)
 		ft_printf("MD5 (\"%s\") = ", arg->argument.content);
 	ssl->hashfct(arg->argument.content, arg->argument.len);
 	ft_printf("\n");
-    return (0);
+	return (0);
 }

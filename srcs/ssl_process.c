@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_ssl.h"
-#include <stdio.h>
 
 static int	process_file(char **filename, t_arg *arg, t_ssl *ssl)
 {
@@ -103,7 +102,6 @@ static int	process_arg(char ***av, t_ssl *ssl)
 		ssl->only_file = 1;
 		process_file(*av, &arg, ssl);
 	}
-	// debug_arg(&arg);
 	clear_ssl_arg(&arg);
 	return (ret);
 }

@@ -14,7 +14,8 @@
 #include "../../includes/ft_ssl.h"
 #include "../../includes/ssl_sha256.h"
 
-void		ssl_sha256_update(t_sha256_ctx *ctx, const uint8_t data[], size_t len)
+void		ssl_sha256_update(t_sha256_ctx *ctx, const uint8_t data[],
+	size_t len)
 {
 	size_t	i;
 

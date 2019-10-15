@@ -26,10 +26,10 @@ static void	print_sha256(uint8_t *hash)
 	}
 }
 
-void	ssl_sha256(uint8_t *input, size_t size)
+void		ssl_sha256(uint8_t *input, size_t size)
 {
 	t_sha256_ctx	ctx;
-	uint8_t			digest[16];
+	uint8_t			digest[32];
 
 	ssl_sha256_init(&ctx);
 	ssl_sha256_update(&ctx, input, size);

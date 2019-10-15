@@ -16,7 +16,6 @@
 
 void	apply_ff(t_md5_transform *p, uint32_t x[16])
 {
-	// debug_params(p);
 	md5_ff(0, p, x[0], S11, 0xd76aa478);
 	md5_ff(3, p, x[1], S12, 0xe8c7b756);
 	md5_ff(2, p, x[2], S13, 0x242070db);
@@ -33,7 +32,6 @@ void	apply_ff(t_md5_transform *p, uint32_t x[16])
 	md5_ff(3, p, x[13], S12, 0xfd987193);
 	md5_ff(2, p, x[14], S13, 0xa679438e);
 	md5_ff(1, p, x[15], S14, 0x49b40821);
-	// debug_params(p);
 }
 
 void	apply_gg(t_md5_transform *p, uint32_t x[16])

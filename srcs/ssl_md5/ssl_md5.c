@@ -13,7 +13,6 @@
 
 #include "../../includes/ft_ssl.h"
 #include "../../includes/ssl_md5.h"
-#include <stdio.h>
 
 static void	print_md5(uint8_t *hash)
 {
@@ -27,7 +26,7 @@ static void	print_md5(uint8_t *hash)
 	}
 }
 
-void			ssl_md5(uint8_t *input, size_t size)
+void		ssl_md5(uint8_t *input, size_t size)
 {
 	t_md5_ctx	ctx;
 	uint8_t		digest[16];
@@ -35,6 +34,5 @@ void			ssl_md5(uint8_t *input, size_t size)
 	ssl_md5_init(&ctx);
 	ssl_md5_update(&ctx, input, size);
 	ssl_md5_final(digest, &ctx);
-
 	print_md5(digest);
 }
